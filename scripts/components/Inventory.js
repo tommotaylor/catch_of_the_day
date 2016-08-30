@@ -36,7 +36,6 @@ class Inventory extends React.Component {
   }
 
   authenticate(provider) {
-    console.log("Trying to auth with " + provider);
     firebase.auth().signInWithPopup(provider)
     .then(this.authHandler)
     .catch((error) => {
@@ -64,13 +63,16 @@ class Inventory extends React.Component {
     })
   }
 
-  // signOut() {
-  //   firebase.auth().signOut().then(() => {
-  //     this.setState({
-  //       uid : null
-  //     });
-  //   }, (error) => console.error("Error: ", error));
-  // }
+  signOut() {
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      this.setState({
+        uid : null
+      });
+    }, function(error) {
+      // An error happened.
+    });
+  }
 
   renderLogin() {
     return (
